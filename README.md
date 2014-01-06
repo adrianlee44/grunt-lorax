@@ -28,20 +28,47 @@ grunt.initConfig({
     options: {
       // Task-specific options go here.
     },
-    your_target: {
-      // Target-specific file lists and/or options go here.
-    },
+    files: "",
   },
 })
 ```
 
 ### Options
 
-#### options.separator
+#### options.url
 Type: `String`
-Default value: linefeed
+Default value: ""
 
-Concatenated files will be joined on this string.
+URL to project repository
+
+#### options.type
+Type: `String`
+Default value: "^fix|^feature|^refactor|BREAKING"
+
+Regular expression to match git commits
+
+#### options.issue
+Type: `String`
+Default value: "/issues/%s"
+
+URL template to specific issue
+
+#### options.commit
+Type: `String`
+Default value: "/commit/%s"
+
+URL template to specific commit
+
+#### options.display
+Type: `Object`
+Default value: {
+  fix: "Bug Fixes",
+  feature: "Features",
+  breaking: "Breaking Changes",
+  refactor: "Optimizations"
+}
+
+Display text for different commit type
 
 ### Usage Examples
 
@@ -49,16 +76,10 @@ Concatenated files will be joined on this string.
 ```js
 grunt.initConfig({
   lorax: {
-    options: {},
-    files: {
-      'dest/output.md': ['src/file1.coffee', 'src/file2.coffee'],
+    options: {
+      url: "https://github.com/adrianlee44/grunt-lorax"
     },
+    files: "changelog.md",
   },
 })
 ```
-
-## Contributing
-In lieu of a formal styleguide, take care to maintain the existing coding style. Add unit tests for any new or changed functionality. Lint and test your code using [Grunt](http://gruntjs.com/).
-
-## Release History
-- 2014-01-03   v0.1.0   Initial working commit.
