@@ -37,6 +37,12 @@ module.exports = (grunt) ->
         files: "src/lorax.coffee"
         tasks: ["coffeelint", "coffee"]
 
+  grunt.registerTask "fileCheck", ->
+    if grunt.file.exists "tmp/fixture.md"
+      grunt.log.ok()
+    else
+      grunt.fail.fatal "Missing changelog"
+
   # Actually load this plugin's task(s).
   grunt.loadTasks "tasks"
 
@@ -49,7 +55,7 @@ module.exports = (grunt) ->
 
   # Whenever the "test" task is run, first clean the "tmp" dir, then run this
   # plugin's task(s), then test the result.
-  grunt.registerTask "test", ["clean", "coffee", "lorax", "nodeunit"]
+  grunt.registerTask "test", ["clean", "coffee", "lorax", "fileCheck"]
 
   # By default, lint and run all tests.
   grunt.registerTask "default", ["coffeelint", "test"]
