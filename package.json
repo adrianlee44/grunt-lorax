@@ -48,6 +48,6 @@
     "git"
   ],
   "dependencies": {
-    "lorax": "0.1.2"
+    "lorax": "0.1.3"
   }
 }
