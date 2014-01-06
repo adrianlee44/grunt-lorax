@@ -22,6 +22,10 @@ module.exports = (grunt) ->
     lorax:
       fixture:
         files: "tmp/fixture.md"
+      build:
+        options:
+          url: "https://github.com/adrianlee44/grunt-lorax"
+        files: "changelog.md"
 
     coffee:
       src:
@@ -55,7 +59,7 @@ module.exports = (grunt) ->
 
   # Whenever the "test" task is run, first clean the "tmp" dir, then run this
   # plugin's task(s), then test the result.
-  grunt.registerTask "test", ["clean", "coffee", "lorax", "fileCheck"]
+  grunt.registerTask "test", ["clean", "coffee", "lorax:fixture", "fileCheck"]
 
   # By default, lint and run all tests.
   grunt.registerTask "default", ["coffeelint", "test"]
