@@ -36,6 +36,11 @@ module.exports = (grunt) ->
       grunt.log.ok "Parsed #{parsedCommits.length} commit(s)"
 
       result = lorax.write parsedCommits, options.tag()
+
+      # Append to original document
+      orig   = if grunt.file.exists dest then grunt.file.read dest else ""
+      result = result + orig
+
       grunt.file.write dest, result, encoding: "utf-8"
 
       grunt.log.ok "File \"#{dest}\" created."
