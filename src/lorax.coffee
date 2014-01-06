@@ -14,9 +14,8 @@ module.exports = (grunt) ->
     lorax = require "lorax"
 
     options = @options
-      separator: grunt.util.linefeed
-      type:      "^fix|^feature|^refactor|BREAKING"
-      tag:       ->
+      type: "^fix|^feature|^refactor|BREAKING"
+      tag:  ->
         tag = ""
         if grunt.file.exists "package.json"
           pkg = grunt.file.readJSON "package.json"
@@ -28,10 +27,10 @@ module.exports = (grunt) ->
     files  = @data.files
     @files = [{dest: files}] if typeof files is "string"
     dest   = @files[0].dest
-    print  = (msg) -> grunt.log.ok "Lorax - #{msg}"
 
-    # Iterate over all specified file groups.
-    lorax.get(options.type, print).then (commits) ->
+    lorax.config.set options
+
+    lorax.get(options.type).then (commits) ->
       parsedCommits = (lorax.parseCommit commit for commit in commits when commit)
 
       grunt.log.ok "Parsed #{parsedCommits.length} commit(s)"
